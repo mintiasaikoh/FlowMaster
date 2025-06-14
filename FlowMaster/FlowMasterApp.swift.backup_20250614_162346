@@ -1,0 +1,20 @@
+//
+//  FlowMasterApp.swift
+//  FlowMaster
+//
+//  Created on 2025
+//
+
+import SwiftUI
+
+@main
+struct FlowMasterApp: App {
+    @StateObject private var habitStore = HabitStore()
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .environmentObject(habitStore)
+        }
+    }
+}

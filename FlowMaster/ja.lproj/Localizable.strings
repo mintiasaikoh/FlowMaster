@@ -1,0 +1,112 @@
+/* 
+  Localizable.strings
+  FlowMaster
+  
+  日本語ローカライゼーション
+*/
+
+// MARK: - 一般
+"app_name" = "FlowMaster";
+"welcome" = "ようこそ";
+"continue" = "続ける";
+"cancel" = "キャンセル";
+"done" = "完了";
+"save" = "保存";
+"delete" = "削除";
+"edit" = "編集";
+"settings" = "設定";
+"close" = "閉じる";
+
+// MARK: - オンボーディング
+"onboarding_title_1" = "習慣が星座になる";
+"onboarding_desc_1" = "あなたの毎日の習慣が美しい星座として可視化されます";
+"onboarding_title_2" = "タスクを楽しく管理";
+"onboarding_desc_2" = "3Dバブルインターフェースで直感的にタスク整理";
+"onboarding_title_3" = "あなただけのAI";
+"onboarding_desc_3" = "完全プライバシー保護。すべてデバイス内で処理されます";
+
+// MARK: - メイン画面
+"today_tasks" = "今日のタスク";
+"habits" = "習慣";
+"focus_time" = "集中タイム";
+"no_tasks" = "タスクがありません";
+"add_first_task" = "最初のタスクを追加しましょう";
+
+// MARK: - タスク
+"new_task" = "新しいタスク";
+"task_title" = "タスク名";
+"task_description" = "説明（任意）";
+"due_date" = "期限";
+"priority" = "優先度";
+"priority_high" = "高";
+"priority_medium" = "中";
+"priority_low" = "低";
+
+// MARK: - 習慣
+"new_habit" = "新しい習慣";
+"habit_name" = "習慣名";
+"frequency" = "頻度";
+"daily" = "毎日";
+"weekly" = "週単位";
+"custom" = "カスタム";
+"streak" = "継続日数";
+"best_streak" = "最長記録";
+
+// MARK: - 習慣の星座
+"constellation_view" = "習慣の星座";
+"your_constellation" = "あなたの星座";
+"days_active" = "%d日継続中";
+"tap_to_explore" = "タップして探索";
+
+// MARK: - フロー状態
+"flow_state" = "フロー状態";
+"in_flow" = "集中モード中";
+"start_focus" = "集中開始";
+"take_break" = "休憩する";
+"focus_time_left" = "残り%d分";
+
+// MARK: - 達成・報酬
+"task_completed" = "タスク完了！";
+"habit_checked" = "習慣達成！";
+"new_achievement" = "新しい実績";
+"level_up" = "レベルアップ！";
+"keep_going" = "その調子！";
+
+// MARK: - 通知
+"morning_greeting" = "おはようございます！今日も素敵な1日を始めましょう✨";
+"evening_summary" = "今日もお疲れさまでした。%d個のタスクを完了しました";
+"habit_reminder" = "そろそろ「%@」の時間です";
+"focus_reminder" = "集中タイムを始めませんか？";
+
+// MARK: - 設定
+"account" = "アカウント";
+"notifications" = "通知";
+"appearance" = "外観";
+"theme" = "テーマ";
+"light_theme" = "ライト";
+"dark_theme" = "ダーク";
+"system_theme" = "システム設定に従う";
+"subscription" = "サブスクリプション";
+"privacy" = "プライバシー";
+"help" = "ヘルプ";
+"about" = "このアプリについて";
+
+// MARK: - サブスクリプション
+"premium_title" = "FlowMaster プレミアム";
+"premium_features" = "プレミアム機能";
+"unlimited_tasks" = "タスク数無制限";
+"advanced_analytics" = "詳細な分析";
+"custom_themes" = "カスタムテーマ";
+"cloud_sync" = "iCloudシンク";
+"monthly_plan" = "月額プラン";
+"yearly_plan" = "年額プラン";
+"price_monthly" = "¥480/月";
+"price_yearly" = "¥4,800/年";
+"free_trial" = "無料トライアル";
+"restore_purchase" = "購入を復元";
+
+// MARK: - エラー
+"error_generic" = "エラーが発生しました";
+"error_network" = "ネットワークエラー";
+"error_save_failed" = "保存に失敗しました";
+"try_again" = "もう一度お試しください";

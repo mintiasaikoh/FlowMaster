@@ -1,0 +1,129 @@
+{
+  "identifier" : "FlowMasterStoreConfig",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "ja_JP",
+    "_storefront" : "JPN",
+    "_storeKitErrors" : [
+
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21472841",
+      "localizations" : [
+        {
+          "description" : "FlowMasterのサブスクリプション",
+          "displayName" : "FlowMaster",
+          "locale" : "ja_JP"
+        }
+      ],
+      "name" : "FlowMaster",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "1350",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6499184321",
+          "introductoryOffer" : {
+            "displayPrice" : "0",
+            "internalID" : "6499184322",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
+          "localizations" : [
+            {
+              "description" : "全機能アクセス・100万パーティクル・AR機能",
+              "displayName" : "FlowMaster Premium",
+              "locale" : "ja_JP"
+            }
+          ],
+          "productID" : "com.flowmaster.premium.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Premium Monthly",
+          "subscriptionGroupID" : "21472841",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "13500",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6499184323",
+          "introductoryOffer" : {
+            "displayPrice" : "0",
+            "internalID" : "6499184324",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1M"
+          },
+          "localizations" : [
+            {
+              "description" : "全機能アクセス・2ヶ月分お得",
+              "displayName" : "FlowMaster Premium 年額",
+              "locale" : "ja_JP"
+            }
+          ],
+          "productID" : "com.flowmaster.premium.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Premium Yearly",
+          "subscriptionGroupID" : "21472841",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "480",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6499184325",
+          "introductoryOffer" : {
+            "displayPrice" : "0",
+            "internalID" : "6499184326",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "基本機能・10個の習慣管理",
+              "displayName" : "FlowMaster Basic",
+              "locale" : "ja_JP"
+            }
+          ],
+          "productID" : "com.flowmaster.basic.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Basic Monthly",
+          "subscriptionGroupID" : "21472841",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

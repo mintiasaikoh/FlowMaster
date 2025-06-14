@@ -1,0 +1,16 @@
+/* 
+  InfoPlist.strings
+  FlowMaster
+  
+  Info.plist日本語ローカライゼーション
+*/
+
+// アプリ名
+"CFBundleDisplayName" = "FlowMaster";
+"CFBundleName" = "FlowMaster";
+
+// 権限説明
+"NSCameraUsageDescription" = "AR機能で習慣の庭を表示するためにカメラを使用します";
+"NSHealthShareUsageDescription" = "睡眠データを参照して最適な作業時間を提案します（任意）";
+"NSHealthUpdateUsageDescription" = "このアプリはヘルスケアデータを更新しません";
+"NSUserTrackingUsageDescription" = "このアプリはユーザーをトラッキングしません";

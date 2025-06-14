@@ -1,0 +1,341 @@
+//
+//  ContentView.swift
+//  FlowMaster
+//
+//  Created on 2025
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    @State private var selectedTab = 0
+    @State private var showVisualization = false
+    @EnvironmentObject var habitStore: HabitStore
+    
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            // ホームタブ
+            NavigationStack {
+                HabitListView(showVisualization: $showVisualization)
+            }
+            .tabItem {
+                Label("ホーム", systemImage: "house.fill")
+            }
+            .tag(0)
+            
+            // ビジュアライゼーションタブ
+            NavigationStack {
+                VisualizationView()
+            }
+            .tabItem {
+                Label("ビジュアル", systemImage: "sparkles")
+            }
+            .tag(1)
+            
+            // 統計タブ
+            NavigationStack {
+                StatsView()
+            }
+            .tabItem {
+                Label("統計", systemImage: "chart.line.uptrend.xyaxis")
+            }
+            .tag(2)
+            
+            // 設定タブ
+            NavigationStack {
+                SettingsView()
+            }
+            .tabItem {
+                Label("設定", systemImage: "gear")
+            }
+            .tag(3)
+        }
+        .tint(.blue)
+        .sheet(isPresented: $showVisualization) {
+            FlowVisualizationView()
+        }
+    }
+}
+
+// ビジュアライゼーションビュー
+struct VisualizationView: View {
+    @EnvironmentObject var habitStore: HabitStore
+    @State private var selectedVisualization = 0
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            // セグメント選択
+            Picker("ビジュアライゼーション", selection: $selectedVisualization) {
+                Text("フローバブル").tag(0)
+                Text("習慣ツリー").tag(1)
+                Text("進捗マップ").tag(2)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+            
+            // ビジュアライゼーション表示
+            GeometryReader { geometry in
+                if selectedVisualization == 0 {
+                    SpriteKitView(scene: FlowBubbleScene(size: geometry.size))
+                        .ignoresSafeArea()
+                } else if selectedVisualization == 1 {
+                    SpriteKitView(scene: HabitTreeScene(habits: habitStore.activeHabits, size: geometry.size))
+                        .ignoresSafeArea()
+                } else {
+                    ProgressMapView(habits: habitStore.activeHabits)
+                }
+            }
+        }
+        .navigationTitle("ビジュアライゼーション")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// 統計ビュー
+struct StatsView: View {
+    @EnvironmentObject var habitStore: HabitStore
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                // 全体統計
+                OverallStatsCard()
+                    .padding(.horizontal)
+                
+                // 習慣別統計
+                ForEach(habitStore.activeHabits) { habit in
+                    HabitStatsCard(habit: habit)
+                        .padding(.horizontal)
+                }
+            }
+            .padding(.vertical)
+        }
+        .navigationTitle("統計")
+        .navigationBarTitleDisplayMode(.large)
+    }
+}
+
+// 全体統計カード
+struct OverallStatsCard: View {
+    @EnvironmentObject var habitStore: HabitStore
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("全体の統計")
+                .font(.headline)
+            
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                StatBox(
+                    title: "総習慣数",
+                    value: "\(habitStore.activeHabits.count)",
+                    icon: "list.bullet",
+                    color: .blue
+                )
+                
+                StatBox(
+                    title: "今日の達成率",
+                    value: "\(Int(habitStore.todayCompletionRate * 100))%",
+                    icon: "percent",
+                    color: .green
+                )
+                
+                StatBox(
+                    title: "最長ストリーク",
+                    value: "\(habitStore.longestOverallStreak)日",
+                    icon: "flame.fill",
+                    color: .orange
+                )
+                
+                StatBox(
+                    title: "総完了数",
+                    value: "\(habitStore.totalCompletions)",
+                    icon: "checkmark.circle.fill",
+                    color: .purple
+                )
+            }
+        }
+        .padding()
+        .background(Color(.systemGray6))
+        .cornerRadius(16)
+    }
+}
+
+// 統計ボックス
+struct StatBox: View {
+    let title: String
+    let value: String
+    let icon: String
+    let color: Color
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.title2)
+                .foregroundColor(color)
+            
+            Text(value)
+                .font(.title3)
+                .fontWeight(.bold)
+            
+            Text(title)
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+    }
+}
+
+// 習慣別統計カード
+struct HabitStatsCard: View {
+    let habit: Habit
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Image(systemName: habit.icon)
+                    .font(.title3)
+                    .foregroundColor(habit.swiftUIColor)
+                
+                Text(habit.title)
+                    .font(.headline)
+                
+                Spacer()
+            }
+            
+            HStack(spacing: 20) {
+                VStack(alignment: .leading) {
+                    Text("現在のストリーク")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Text("\(habit.currentStreak)日")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                }
+                
+                VStack(alignment: .leading) {
+                    Text("達成率")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Text("\(Int(habit.completionRate * 100))%")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                }
+                
+                Spacer()
+                
+                // ミニカレンダー
+                MiniCalendarView(habit: habit)
+            }
+        }
+        .padding()
+        .background(Color(.systemGray6))
+        .cornerRadius(16)
+    }
+}
+
+// ミニカレンダービュー
+struct MiniCalendarView: View {
+    let habit: Habit
+    let lastSevenDays = (0..<7).map { Calendar.current.date(byAdding: .day, value: -$0, to: Date())! }.reversed()
+    
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(Array(lastSevenDays), id: \.self) { date in
+                VStack(spacing: 2) {
+                    Text(dayOfWeek(date))
+                        .font(.system(size: 10))
+                        .foregroundColor(.secondary)
+                    
+                    Circle()
+                        .fill(isCompleted(date) ? habit.swiftUIColor : Color(.systemGray4))
+                        .frame(width: 20, height: 20)
+                }
+            }
+        }
+    }
+    
+    func dayOfWeek(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E"
+        formatter.locale = Locale(identifier: "ja_JP")
+        return String(formatter.string(from: date).prefix(1))
+    }
+    
+    func isCompleted(_ date: Date) -> Bool {
+        habit.completedDates.contains { Calendar.current.isDate($0, inSameDayAs: date) }
+    }
+}
+
+// 進捗マップビュー
+struct ProgressMapView: View {
+    let habits: [Habit]
+    
+    var body: some View {
+        VStack {
+            Text("進捗マップ")
+                .font(.title2)
+                .fontWeight(.bold)
+            
+            Text("今後実装予定")
+                .foregroundColor(.secondary)
+            
+            Spacer()
+        }
+        .padding()
+    }
+}
+
+// 設定ビュー
+struct SettingsView: View {
+    var body: some View {
+        VStack {
+            Text("設定")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            
+            List {
+                Section("アプリケーション") {
+                    HStack {
+                        Label("通知", systemImage: "bell")
+                        Spacer()
+                        Toggle("", isOn: .constant(true))
+                    }
+                    
+                    HStack {
+                        Label("ダークモード", systemImage: "moon")
+                        Spacer()
+                        Toggle("", isOn: .constant(false))
+                    }
+                }
+                
+                Section("データ") {
+                    Label("バックアップ", systemImage: "icloud")
+                    Label("データをリセット", systemImage: "trash")
+                        .foregroundColor(.red)
+                }
+                
+                Section("その他") {
+                    Label("利用規約", systemImage: "doc.text")
+                    Label("プライバシーポリシー", systemImage: "lock.shield")
+                    
+                    HStack {
+                        Label("バージョン", systemImage: "info.circle")
+                        Spacer()
+                        Text("1.0.0")
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+        }
+        .navigationTitle("設定")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+#Preview {
+    ContentView()
+        .environmentObject(HabitStore())
+}
